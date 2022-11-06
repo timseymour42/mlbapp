@@ -244,7 +244,7 @@ def wins_for_team(lineup, rotation, model='standard'):
 
 
 def clean_game_data(all_stats):
-    all_stats = all_stats[all_stats.GS == '1']
+    all_stats = all_stats[all_stats.GS == 1]
     # These columns have only null values for single games
     all_stats.drop(columns = ['xwOBA', 'xERA', 'vFA (pi)'], inplace = True)
     # applying the function to each column to ensure all data points are numerical
@@ -322,10 +322,10 @@ def refresh_data():
     sql_hitter_data = pd.read_sql('SELECT * FROM hitter_data', con = db)
     sql_pitcher_data = pd.read_sql('SELECT * FROM pitcher_data', con = db)
     '''
-    sql_game_data = pd.read_csv()
-    sql_team_data = pd.read_csv()
-    sql_hitter_data = pd.read_csv()
-    sql_pitcher_data = pd.read_csv()
+    sql_game_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/game_data.csv?raw=true')
+    sql_team_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/team_data.csv?raw=true')
+    sql_hitter_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/hitter_data.csv?raw=true')
+    sql_pitcher_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/pitcher_data.csv?raw=true')
     sql_col_mapping = {'BB%': 'BB_pct', 'K%': 'K_pct', 'wRC+': 'wRC_plus', 'K/9': 'K_per_9',
         'BB/9': 'BB_per_9', 'HR/9': 'HR_per_9', 'LOB%': 'LOB_pct', 'GB%': 'GB_pct', 'HR/FB': 'HR_per_FB', 'vFA (pi)': 'vFA'}
     python_col_mapping = {v: k for k, v in sql_col_mapping.items()}
