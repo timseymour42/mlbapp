@@ -311,6 +311,9 @@ def clean_player_data(hit_df, pitch_df):
     return hit_df, pitch_df
 
 def refresh_data():
+    '''
+    This section will be replaced to read from github csv for deployment purposes
+
     db = MySQLdb.connect(host='127.0.0.1', user='root', passwd='', db='mlb_db')
     tblchk = db.cursor()
     # The year of the latest record in the data table
@@ -318,6 +321,11 @@ def refresh_data():
     sql_team_data = pd.read_sql('SELECT * FROM team_data', con = db)
     sql_hitter_data = pd.read_sql('SELECT * FROM hitter_data', con = db)
     sql_pitcher_data = pd.read_sql('SELECT * FROM pitcher_data', con = db)
+    '''
+    sql_game_data = pd.read_csv()
+    sql_team_data = pd.read_csv()
+    sql_hitter_data = pd.read_csv()
+    sql_pitcher_data = pd.read_csv()
     sql_col_mapping = {'BB%': 'BB_pct', 'K%': 'K_pct', 'wRC+': 'wRC_plus', 'K/9': 'K_per_9',
         'BB/9': 'BB_per_9', 'HR/9': 'HR_per_9', 'LOB%': 'LOB_pct', 'GB%': 'GB_pct', 'HR/FB': 'HR_per_FB', 'vFA (pi)': 'vFA'}
     python_col_mapping = {v: k for k, v in sql_col_mapping.items()}
