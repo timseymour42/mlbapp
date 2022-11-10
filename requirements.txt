@@ -17,7 +17,7 @@ Werkzeug==2.2.2
 datetime
 pandas
 numpy
-sklearn
+scikit_learn
 mysqlclient
 dash-bootstrap-components
 dash-bootstrap-templates
