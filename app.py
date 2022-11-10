@@ -38,6 +38,7 @@ from dash.exceptions import PreventUpdate
 import MySQLdb
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
+from server import server
 
 load_figure_template('LUX')
 
@@ -357,7 +358,7 @@ def refresh_data():
 
 team_history, ui_hit_df, ui_pitch_df, X, y, scales, hit_sel, pit_sel, curr_year, first_year, games, innings = refresh_data()
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.LUX])
+app = Dash(name='my_dash', external_stylesheets=[dbc.themes.LUX], sharing=True, server=server, url_base_pathname='/mydash')
 #server for heroku
 server=app.server
 def generate_table(dataframe, id):
