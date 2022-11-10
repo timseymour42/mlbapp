@@ -16,7 +16,7 @@ tenacity==8.1.0
 Werkzeug==2.2.2
 datetime
 pandas
-numpy
+numpy==1.23.4
 scikit_learn==0.22.2.post1
 mysqlclient
 dash-bootstrap-components
