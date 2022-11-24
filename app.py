@@ -358,7 +358,7 @@ def refresh_data():
 
 team_history, ui_hit_df, ui_pitch_df, X, y, scales, hit_sel, pit_sel, curr_year, first_year, games, innings = refresh_data()
 
-app = Dash(name='my_dash', external_stylesheets=[dbc.themes.LUX], server=server, url_base_pathname='/mydash/')
+app = Dash(__name__, external_stylesheets=[dbc.themes.LUX])
 #server for heroku
 server=app.server
 def generate_table(dataframe, id):
