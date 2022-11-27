@@ -41,321 +41,321 @@ from dash_bootstrap_templates import load_figure_template
 
 load_figure_template('LUX')
 
-# def date_to_str(date):
-#     '''
-#     Args:
-#         date (datetime): datetime object for the day of the season
+def date_to_str(date):
+    '''
+    Args:
+        date (datetime): datetime object for the day of the season
 
-#     Returns:
-#         str: string representation of the given date
+    Returns:
+        str: string representation of the given date
 
-#     '''
-#     month = str(date.month)
-#     day = str(date.day)
-#     if date.day <= 9:
-#         day = str(0) + day
-#     if date.month <= 9:
-#         month = str(0) + month
-#     return str(date.year) + '-' + month + '-' + day
+    '''
+    month = str(date.month)
+    day = str(date.day)
+    if date.day <= 9:
+        day = str(0) + day
+    if date.month <= 9:
+        month = str(0) + month
+    return str(date.year) + '-' + month + '-' + day
 
-# # turning every value in the dataframe into a float
-# def string_to_num(string):
-#     if(string == 'NA'):
-#         return 'NA'
-#     elif(type(string) == str):
-#         if('%' in string):
-#             string = string.replace('%', '')
-#     return float(string)
+# turning every value in the dataframe into a float
+def string_to_num(string):
+    if(string == 'NA'):
+        return 'NA'
+    elif(type(string) == str):
+        if('%' in string):
+            string = string.replace('%', '')
+    return float(string)
 
 
 
-# class pitcher:
-#     hr = 0
-#     war = 0
-#     # parameterized constructor
-#     def __init__(self, name, seasons, ip):
-#         pitch_df = ui_pitch_df.set_index(['Name', 'Season'])
-#         pitcher = pitch_df.loc[name]
-#         #eliminating seasons that the player did not play in the given range
-#         played = list()
-#         for seas in seasons:
-#             if seas in pitcher.index:
-#                 played.append(seas)
-#         pitcher = pitcher.loc[played]
-#         #finds pitcher HR allowed per inning pitched
-#         self.hr = pitcher['HR'].sum() / pitcher['IP'].sum()
-#         #finds pitcher WAR per inning pitched
-#         self.war = pitcher['WAR'].sum() / pitcher['IP'].sum()
-#         #Number of innings to be pitched by player (hypothetically)
-#         self.ip = ip
-#         self.name = name
+class pitcher:
+    hr = 0
+    war = 0
+    # parameterized constructor
+    def __init__(self, name, seasons, ip):
+        pitch_df = ui_pitch_df.set_index(['Name', 'Season'])
+        pitcher = pitch_df.loc[name]
+        #eliminating seasons that the player did not play in the given range
+        played = list()
+        for seas in seasons:
+            if seas in pitcher.index:
+                played.append(seas)
+        pitcher = pitcher.loc[played]
+        #finds pitcher HR allowed per inning pitched
+        self.hr = pitcher['HR'].sum() / pitcher['IP'].sum()
+        #finds pitcher WAR per inning pitched
+        self.war = pitcher['WAR'].sum() / pitcher['IP'].sum()
+        #Number of innings to be pitched by player (hypothetically)
+        self.ip = ip
+        self.name = name
     
-#     def display(self):
-#         print("HR/9: " + str(self.hr / 9))
-#         print("WAR/9 " + str(self.war / 9))
+    def display(self):
+        print("HR/9: " + str(self.hr / 9))
+        print("WAR/9 " + str(self.war / 9))
 
-#     def setIP(self, ip):
-#         self.ip = ip
+    def setIP(self, ip):
+        self.ip = ip
 
-#     def scale(self, innings):
-#         self.hr = self.hr * innings
-#         self.war = self.war * innings
+    def scale(self, innings):
+        self.hr = self.hr * innings
+        self.war = self.war * innings
 
-#     def getHR(self):
-#         return self.hr
+    def getHR(self):
+        return self.hr
 
-#     def getWAR(self):
-#         return self.war
+    def getWAR(self):
+        return self.war
 
 
-# class hitter:
-#     wrcp = 0
-#     bsr = 0
-#     defn = 0
-#     slg = 0
-#     # parameterized constructor
-#     def __init__(self, name, seasons, games):
-#         hit_df = ui_hit_df.set_index(['Name', 'Season'])
-#         hitter = hit_df.loc[name]
-#         #eliminating seasons that the player did not play in the given range
-#         played = list()
-#         for seas in seasons:
-#             if seas in hitter.index:
-#                 played.append(seas)
-#         hitter = hitter.loc[played]
-#         #wRC+ is normalized season by season, so average is taken across inputted season range; drawback is smaller sample sizes may have greater effect than hoped
-#         #Users will be able to see season by season stats for the player, so they can use their own intuition to evaluate validity of using a given season for a player
-#         self.wrcp = hitter['wRC+'].mean()
-#         #finds slugging percentage
-#         self.slg = hitter['TB'].sum() / hitter['AB'].sum()
-#         #finds defense per game
-#         self.defn = hitter['Def'].sum() / hitter['G'].sum()
-#         #finds baserunning per game
-#         self.bsr = hitter['BsR'].sum() / hitter['G'].sum()
-#         #Number of games to be played by player (hypothetically)
-#         self.games = games
-#         self.name = name
+class hitter:
+    wrcp = 0
+    bsr = 0
+    defn = 0
+    slg = 0
+    # parameterized constructor
+    def __init__(self, name, seasons, games):
+        hit_df = ui_hit_df.set_index(['Name', 'Season'])
+        hitter = hit_df.loc[name]
+        #eliminating seasons that the player did not play in the given range
+        played = list()
+        for seas in seasons:
+            if seas in hitter.index:
+                played.append(seas)
+        hitter = hitter.loc[played]
+        #wRC+ is normalized season by season, so average is taken across inputted season range; drawback is smaller sample sizes may have greater effect than hoped
+        #Users will be able to see season by season stats for the player, so they can use their own intuition to evaluate validity of using a given season for a player
+        self.wrcp = hitter['wRC+'].mean()
+        #finds slugging percentage
+        self.slg = hitter['TB'].sum() / hitter['AB'].sum()
+        #finds defense per game
+        self.defn = hitter['Def'].sum() / hitter['G'].sum()
+        #finds baserunning per game
+        self.bsr = hitter['BsR'].sum() / hitter['G'].sum()
+        #Number of games to be played by player (hypothetically)
+        self.games = games
+        self.name = name
     
-#     def display(self):
-#         # displays statistics at a 162 game pace
-#         print("wRC+: " + str(self.wrcp))
-#         print("BsR: " + str(self.bsr * 162))
-#         print("Def: " + str(self.defn * 162))
-#         print("SLG: " + str(self.slg))
+    def display(self):
+        # displays statistics at a 162 game pace
+        print("wRC+: " + str(self.wrcp))
+        print("BsR: " + str(self.bsr * 162))
+        print("Def: " + str(self.defn * 162))
+        print("SLG: " + str(self.slg))
 
-#     def setGames(self, games):
-#         self.games = games
+    def setGames(self, games):
+        self.games = games
 
-#     def scale(self, games):
-#         self.wrcp = self.wrcp * games
-#         self.bsr = self.bsr * games
-#         self.defn = self.defn * games
-#         self.slg = self.slg * games
+    def scale(self, games):
+        self.wrcp = self.wrcp * games
+        self.bsr = self.bsr * games
+        self.defn = self.defn * games
+        self.slg = self.slg * games
 
-#     def getWRC(self):
-#         return self.wrcp
+    def getWRC(self):
+        return self.wrcp
 
-#     def getBsR(self):
-#         return self.bsr
+    def getBsR(self):
+        return self.bsr
 
-#     def getDef(self):
-#         return self.defn
+    def getDef(self):
+        return self.defn
 
-#     def getSLG(self):
-#         return self.slg
+    def getSLG(self):
+        return self.slg
 
 
-# def pitcher_df(rotation):
-#     #Accumulating dictionaries representing players into a list
-#     ps = list()
-#     for p in rotation:
-#         row = {'Name': p.name, 'IP': p.ip, 'HR': p.hr, 'WAR': p.war}
-#         ps.append(row)
-#     return pd.DataFrame(ps)
+def pitcher_df(rotation):
+    #Accumulating dictionaries representing players into a list
+    ps = list()
+    for p in rotation:
+        row = {'Name': p.name, 'IP': p.ip, 'HR': p.hr, 'WAR': p.war}
+        ps.append(row)
+    return pd.DataFrame(ps)
 
-# def hitter_df(lineup):
-#     #Accumulating dictionaries representing players into a list
-#     hs = list()
-#     for batter in lineup:
-#         row = {'Name': batter.name, 'G': batter.games, 'wRC+': batter.wrcp, 'BsR': batter.bsr, 'Def': batter.defn, 'SLG': batter.slg}
-#         hs.append(row)
-#     return pd.DataFrame(hs)
+def hitter_df(lineup):
+    #Accumulating dictionaries representing players into a list
+    hs = list()
+    for batter in lineup:
+        row = {'Name': batter.name, 'G': batter.games, 'wRC+': batter.wrcp, 'BsR': batter.bsr, 'Def': batter.defn, 'SLG': batter.slg}
+        hs.append(row)
+    return pd.DataFrame(hs)
 
-# def wins_for_team(lineup, rotation, model='standard'):
-#     '''
-#     lineup (list) consists of hitter objects
-#     pitchers (list) consists of pitcher objects
-#     model (Sklearn object) model trained on team data to be used to classify customized team (using predict_proba)
-#     '''
+def wins_for_team(lineup, rotation, model='standard'):
+    '''
+    lineup (list) consists of hitter objects
+    pitchers (list) consists of pitcher objects
+    model (Sklearn object) model trained on team data to be used to classify customized team (using predict_proba)
+    '''
 
-#     #Scaling each players statistics to have their contribution correspond to their designated innings pitched or games played
-#     for batter in lineup:
-#         batter.display()
-#         #multiplies each batting statistic by the games they play
-#         batter.scale(batter.games)
-#         batter.display()
-#     for p in rotation:
-#         p.display()
-#         #multiplies each pitching statistic by the innings they pitch
-#         p.scale(p.ip)
-#         p.display()
+    #Scaling each players statistics to have their contribution correspond to their designated innings pitched or games played
+    for batter in lineup:
+        batter.display()
+        #multiplies each batting statistic by the games they play
+        batter.scale(batter.games)
+        batter.display()
+    for p in rotation:
+        p.display()
+        #multiplies each pitching statistic by the innings they pitch
+        p.scale(p.ip)
+        p.display()
 
-#     #Creating dataframes for simpler aggregation
-#     lineup = hitter_df(lineup)
-#     rotation = pitcher_df(rotation)
+    #Creating dataframes for simpler aggregation
+    lineup = hitter_df(lineup)
+    rotation = pitcher_df(rotation)
 
-#     #ensuring that there are 1458 games played by position players and innings thrown by pitchers
-#     games = lineup['G'].sum()
-#     if games != 1458:
-#         raise Exception(f'Total Games inputted: {games}, must be 1458')
-#     ip = rotation['IP'].sum()
-#     if ip != 1458:
-#         raise Exception(f'Total IP inputted: {ip}, must be 1458')
+    #ensuring that there are 1458 games played by position players and innings thrown by pitchers
+    games = lineup['G'].sum()
+    if games != 1458:
+        raise Exception(f'Total Games inputted: {games}, must be 1458')
+    ip = rotation['IP'].sum()
+    if ip != 1458:
+        raise Exception(f'Total IP inputted: {ip}, must be 1458')
     
-#     stats = dict()
-#     #when scaled wrc is multiplied by games played for each player to ensure proportionate contribution
-#     stats['wRC+'] = lineup['wRC+'].sum() / 1458
-#     #when scaled slg is multiplied by games played for each player to ensure proportionate contribution
-#     stats['SLG'] = lineup['SLG'].sum() / 1458
-#     #The equivalent of a single team's defense metric is the sum of their entire lineup's Def (which is why the denominator is 162)
-#     stats['Def'] = lineup['Def'].sum() / 162
-#     stats['BsR'] = lineup['BsR'].sum() / 162
-#     stats['HR/9'] = rotation['HR'].sum() / (9 * 1458)
-#     stats['WAR'] = rotation['WAR'].sum() / (162)
-#     reg_stats = stats.copy()
-#     #Stored normalization factors from team data
-#     metrics = ['wRC+', 'HR/9', 'BsR', 'WAR', 'Def', 'SLG']
-#     for stat in metrics:
-#         stats[stat] = (stats[stat] - scales.loc[stat]['Mean']) / scales.loc[stat]['Unit Variance']
-#     if (type(model) == str):
-#         logReg = LogisticRegression().fit(X, y)
-#         adaBoost = AdaBoostClassifier(learning_rate = .3, n_estimators = 30).fit(X, y)
-#         wins = logReg.predict_proba([[stats['wRC+'], stats['HR/9'], stats['BsR'], stats['WAR'], stats['Def'], stats['SLG']]])[0][1] * 2
-#         wins += adaBoost.predict_proba([[stats['wRC+'], stats['HR/9'], stats['BsR'], stats['WAR'], stats['Def'], stats['SLG']]])[0][1]
-#         wins /= 3
-#         wins *= 162
-#         return wins, reg_stats
-#     else:
-#         return model.predict_proba([[stats['wRC+'], stats['HR/9'], stats['BsR'], stats['WAR'], stats['Def'], stats['SLG']]])[0][1] * 162, reg_stats
+    stats = dict()
+    #when scaled wrc is multiplied by games played for each player to ensure proportionate contribution
+    stats['wRC+'] = lineup['wRC+'].sum() / 1458
+    #when scaled slg is multiplied by games played for each player to ensure proportionate contribution
+    stats['SLG'] = lineup['SLG'].sum() / 1458
+    #The equivalent of a single team's defense metric is the sum of their entire lineup's Def (which is why the denominator is 162)
+    stats['Def'] = lineup['Def'].sum() / 162
+    stats['BsR'] = lineup['BsR'].sum() / 162
+    stats['HR/9'] = rotation['HR'].sum() / (9 * 1458)
+    stats['WAR'] = rotation['WAR'].sum() / (162)
+    reg_stats = stats.copy()
+    #Stored normalization factors from team data
+    metrics = ['wRC+', 'HR/9', 'BsR', 'WAR', 'Def', 'SLG']
+    for stat in metrics:
+        stats[stat] = (stats[stat] - scales.loc[stat]['Mean']) / scales.loc[stat]['Unit Variance']
+    if (type(model) == str):
+        logReg = LogisticRegression().fit(X, y)
+        adaBoost = AdaBoostClassifier(learning_rate = .3, n_estimators = 30).fit(X, y)
+        wins = logReg.predict_proba([[stats['wRC+'], stats['HR/9'], stats['BsR'], stats['WAR'], stats['Def'], stats['SLG']]])[0][1] * 2
+        wins += adaBoost.predict_proba([[stats['wRC+'], stats['HR/9'], stats['BsR'], stats['WAR'], stats['Def'], stats['SLG']]])[0][1]
+        wins /= 3
+        wins *= 162
+        return wins, reg_stats
+    else:
+        return model.predict_proba([[stats['wRC+'], stats['HR/9'], stats['BsR'], stats['WAR'], stats['Def'], stats['SLG']]])[0][1] * 162, reg_stats
 
 
 
 
 
 
-# def clean_game_data(all_stats):
-#     all_stats = all_stats[all_stats.GS == 1]
-#     # These columns have only null values for single games
-#     all_stats.drop(columns = ['xwOBA', 'xERA', 'vFA (pi)'], inplace = True)
-#     # applying the function to each column to ensure all data points are numerical
-#     for col in all_stats.columns:
-#         if col not in ['Team', 'Date', 'GB']:
-#             all_stats[col] = all_stats[col].apply(string_to_num)
-#     all_stats = all_stats.drop(columns = ['Team', 'G', 'PA', 'R',
-#            'Date', 'L', 'SV', 'GS', 'IP', 'RBI'])
-#     # Only ~100 columns with null values
-#     all_stats.dropna(inplace = True)
-#     X = all_stats.drop(columns = ['W'])
-#     X = X[['wRC+', 'HR/9', 'BsR', 'WAR_y', 'Def', 'SLG']]
-#     cols = X.columns
-#     y = all_stats['W']
-#     #Scaling each column to be 
-#     scaler = StandardScaler()
-#     scaler.fit(X)
-#     X = scaler.transform(X)
-#     X = pd.DataFrame(X, columns = cols)
-#     #Storing values used to scale each feature for manual normalization in later step
-#     feat_names = ['wRC+', 'HR/9', 'BsR', 'WAR', 'Def', 'SLG']
-#     scales = pd.DataFrame({'Feature': feat_names, 'Unit Variance': scaler.scale_, 'Mean': scaler.mean_})
-#     scales.set_index('Feature', inplace = True)
-#     return X, y, scales
+def clean_game_data(all_stats):
+    all_stats = all_stats[all_stats.GS == 1]
+    # These columns have only null values for single games
+    all_stats.drop(columns = ['xwOBA', 'xERA', 'vFA (pi)'], inplace = True)
+    # applying the function to each column to ensure all data points are numerical
+    for col in all_stats.columns:
+        if col not in ['Team', 'Date', 'GB']:
+            all_stats[col] = all_stats[col].apply(string_to_num)
+    all_stats = all_stats.drop(columns = ['Team', 'G', 'PA', 'R',
+           'Date', 'L', 'SV', 'GS', 'IP', 'RBI'])
+    # Only ~100 columns with null values
+    all_stats.dropna(inplace = True)
+    X = all_stats.drop(columns = ['W'])
+    X = X[['wRC+', 'HR/9', 'BsR', 'WAR_y', 'Def', 'SLG']]
+    cols = X.columns
+    y = all_stats['W']
+    #Scaling each column to be 
+    scaler = StandardScaler()
+    scaler.fit(X)
+    X = scaler.transform(X)
+    X = pd.DataFrame(X, columns = cols)
+    #Storing values used to scale each feature for manual normalization in later step
+    feat_names = ['wRC+', 'HR/9', 'BsR', 'WAR', 'Def', 'SLG']
+    scales = pd.DataFrame({'Feature': feat_names, 'Unit Variance': scaler.scale_, 'Mean': scaler.mean_})
+    scales.set_index('Feature', inplace = True)
+    return X, y, scales
 
 
 
-# def clean_team_data(team_data):
-#     # applying the function to each column to ensure all data points are numerical
-#     for col in team_data.columns:
-#         if col not in ['Team', 'Season', 'GB']:
-#             team_data[col] = team_data[col].apply(string_to_num)
-#     # Saving a copy of the scraped data 
-#     return team_data
+def clean_team_data(team_data):
+    # applying the function to each column to ensure all data points are numerical
+    for col in team_data.columns:
+        if col not in ['Team', 'Season', 'GB']:
+            team_data[col] = team_data[col].apply(string_to_num)
+    # Saving a copy of the scraped data 
+    return team_data
 
 
-# def clean_player_data(hit_df, pitch_df):
-#     '''
-#     function intended to make statistics numerical, manually calculate statistics, and set the indices to Name and Season
+def clean_player_data(hit_df, pitch_df):
+    '''
+    function intended to make statistics numerical, manually calculate statistics, and set the indices to Name and Season
 
-#     Args:
-#     wrc (pd.DataFrame) contains individual player data by season
-#     pitch (pd.DataFrame) contains individual pitcher data by season
+    Args:
+    wrc (pd.DataFrame) contains individual player data by season
+    pitch (pd.DataFrame) contains individual pitcher data by season
 
-#     Returns wrc, pitch as clean datasets for use in App'''
+    Returns wrc, pitch as clean datasets for use in App'''
     
-#     hit_df = hit_df[hit_df['wRC+'] != None]
-#     pitch_df.dropna(inplace=True)
-#     # applying the function to each column to ensure all data points are numerical
-#     for col in hit_df.columns:
-#         if col not in ['Name', 'Team', 'GB', 'Pos']:
-#             hit_df[col] = hit_df[col].apply(string_to_num)
-#     for col in pitch_df.columns:
-#         if col not in ['Name', 'Team', 'GB']:
-#             pitch_df[col] = pitch_df[col].apply(string_to_num)
-#     #Determining home runs allowed for each player for easier calculation
-#     pitch_df['HR'] = pitch_df['HR/9'] * pitch_df['IP'] * 9
-#     #Determining total bases for each player for more accurate slugging percentage calculation
-#     # First must find at bats by subtracting walks using walk percentage
-#     # Calculation ignores HBP
-#     hit_df['AB'] = hit_df['PA'] * (1 - (hit_df['BB%'] * .01))
-#     # Calculation necessary for determining slugging percentage over multiple seasons
-#     hit_df['TB'] = hit_df['SLG'] * hit_df['AB']
-#     return hit_df, pitch_df
+    hit_df = hit_df[hit_df['wRC+'] != None]
+    pitch_df.dropna(inplace=True)
+    # applying the function to each column to ensure all data points are numerical
+    for col in hit_df.columns:
+        if col not in ['Name', 'Team', 'GB', 'Pos']:
+            hit_df[col] = hit_df[col].apply(string_to_num)
+    for col in pitch_df.columns:
+        if col not in ['Name', 'Team', 'GB']:
+            pitch_df[col] = pitch_df[col].apply(string_to_num)
+    #Determining home runs allowed for each player for easier calculation
+    pitch_df['HR'] = pitch_df['HR/9'] * pitch_df['IP'] * 9
+    #Determining total bases for each player for more accurate slugging percentage calculation
+    # First must find at bats by subtracting walks using walk percentage
+    # Calculation ignores HBP
+    hit_df['AB'] = hit_df['PA'] * (1 - (hit_df['BB%'] * .01))
+    # Calculation necessary for determining slugging percentage over multiple seasons
+    hit_df['TB'] = hit_df['SLG'] * hit_df['AB']
+    return hit_df, pitch_df
 
-# def refresh_data():
-#     '''
-#     This section will be replaced to read from github csv for deployment purposes
+def refresh_data():
+    '''
+    This section will be replaced to read from github csv for deployment purposes
 
-#     db = MySQLdb.connect(host='127.0.0.1', user='root', passwd='', db='mlb_db')
-#     tblchk = db.cursor()
-#     # The year of the latest record in the data table
-#     sql_game_data = pd.read_sql('SELECT * FROM game_data', con = db)
-#     sql_team_data = pd.read_sql('SELECT * FROM team_data', con = db)
-#     sql_hitter_data = pd.read_sql('SELECT * FROM hitter_data', con = db)
-#     sql_pitcher_data = pd.read_sql('SELECT * FROM pitcher_data', con = db)
-#     '''
-#     sql_game_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/game_data.csv?raw=true')
-#     sql_team_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/team_data.csv?raw=true')
-#     sql_hitter_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/hitter_data.csv?raw=true')
-#     sql_pitcher_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/pitcher_data.csv?raw=true')
-#     sql_col_mapping = {'BB%': 'BB_pct', 'K%': 'K_pct', 'wRC+': 'wRC_plus', 'K/9': 'K_per_9',
-#         'BB/9': 'BB_per_9', 'HR/9': 'HR_per_9', 'LOB%': 'LOB_pct', 'GB%': 'GB_pct', 'HR/FB': 'HR_per_FB', 'vFA (pi)': 'vFA'}
-#     python_col_mapping = {v: k for k, v in sql_col_mapping.items()}
-#     sql_game_data.rename(columns = python_col_mapping, inplace = True)
-#     sql_team_data.rename(columns = python_col_mapping, inplace = True)
-#     sql_hitter_data.rename(columns = python_col_mapping, inplace = True)
-#     sql_pitcher_data.rename(columns = python_col_mapping, inplace = True)
-#     X, y, scales = clean_game_data(sql_game_data)
-#     ui_hit_df, ui_pitch_df = clean_player_data(sql_hitter_data, sql_pitcher_data)
-#     team_history = clean_team_data(sql_team_data)
-#     team_history = team_history[['Team', 'Season', 'wRC+', 'HR/9', 'BsR', 'WAR_y', 'Def', 'SLG', 'W']]
-#     team_history['Season'] = team_history['Season'].apply(int)
-#     team_history = team_history.sort_values(by='Season', ascending=False).round(decimals=3)
-#     team_history['W'] = team_history['W'].round()
-#     ui_hit_df.reset_index(inplace=True)
-#     ui_pitch_df.reset_index(inplace=True)
-#     #hitters selected
-#     hit_sel = pd.DataFrame(columns = ['Name', 'Years', 'Games'])
-#     #pitchers selected
-#     pit_sel = pd.DataFrame(columns = ['Name', 'Years', 'Innings'])
-#     #current year
-#     curr_year = datetime.datetime.now().year
-#     first_year = int(ui_hit_df['Season'].min())
-#     games = 1458
-#     innings = 1458
-#     ui_hit_df = ui_hit_df.round(decimals=3).sort_values(by=['Season', 'HR'], ascending=False)
-#     ui_pitch_df = ui_pitch_df.round(decimals=3).sort_values(by=['Season', 'WAR'], ascending=False)
-#     return team_history, ui_hit_df, ui_pitch_df, X, y, scales, hit_sel, pit_sel, curr_year, first_year, games, innings
+    db = MySQLdb.connect(host='127.0.0.1', user='root', passwd='', db='mlb_db')
+    tblchk = db.cursor()
+    # The year of the latest record in the data table
+    sql_game_data = pd.read_sql('SELECT * FROM game_data', con = db)
+    sql_team_data = pd.read_sql('SELECT * FROM team_data', con = db)
+    sql_hitter_data = pd.read_sql('SELECT * FROM hitter_data', con = db)
+    sql_pitcher_data = pd.read_sql('SELECT * FROM pitcher_data', con = db)
+    '''
+    sql_game_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/game_data.csv?raw=true')
+    sql_team_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/team_data.csv?raw=true')
+    sql_hitter_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/hitter_data.csv?raw=true')
+    sql_pitcher_data = pd.read_csv('https://github.com/timseymour42/mlbapp/blob/main/pitcher_data.csv?raw=true')
+    sql_col_mapping = {'BB%': 'BB_pct', 'K%': 'K_pct', 'wRC+': 'wRC_plus', 'K/9': 'K_per_9',
+        'BB/9': 'BB_per_9', 'HR/9': 'HR_per_9', 'LOB%': 'LOB_pct', 'GB%': 'GB_pct', 'HR/FB': 'HR_per_FB', 'vFA (pi)': 'vFA'}
+    python_col_mapping = {v: k for k, v in sql_col_mapping.items()}
+    sql_game_data.rename(columns = python_col_mapping, inplace = True)
+    sql_team_data.rename(columns = python_col_mapping, inplace = True)
+    sql_hitter_data.rename(columns = python_col_mapping, inplace = True)
+    sql_pitcher_data.rename(columns = python_col_mapping, inplace = True)
+    X, y, scales = clean_game_data(sql_game_data)
+    ui_hit_df, ui_pitch_df = clean_player_data(sql_hitter_data, sql_pitcher_data)
+    team_history = clean_team_data(sql_team_data)
+    team_history = team_history[['Team', 'Season', 'wRC+', 'HR/9', 'BsR', 'WAR_y', 'Def', 'SLG', 'W']]
+    team_history['Season'] = team_history['Season'].apply(int)
+    team_history = team_history.sort_values(by='Season', ascending=False).round(decimals=3)
+    team_history['W'] = team_history['W'].round()
+    ui_hit_df.reset_index(inplace=True)
+    ui_pitch_df.reset_index(inplace=True)
+    #hitters selected
+    hit_sel = pd.DataFrame(columns = ['Name', 'Years', 'Games'])
+    #pitchers selected
+    pit_sel = pd.DataFrame(columns = ['Name', 'Years', 'Innings'])
+    #current year
+    curr_year = datetime.datetime.now().year
+    first_year = int(ui_hit_df['Season'].min())
+    games = 1458
+    innings = 1458
+    ui_hit_df = ui_hit_df.round(decimals=3).sort_values(by=['Season', 'HR'], ascending=False)
+    ui_pitch_df = ui_pitch_df.round(decimals=3).sort_values(by=['Season', 'WAR'], ascending=False)
+    return team_history, ui_hit_df, ui_pitch_df, X, y, scales, hit_sel, pit_sel, curr_year, first_year, games, innings
 
-# team_history, ui_hit_df, ui_pitch_df, X, y, scales, hit_sel, pit_sel, curr_year, first_year, games, innings = refresh_data()
+team_history, ui_hit_df, ui_pitch_df, X, y, scales, hit_sel, pit_sel, curr_year, first_year, games, innings = refresh_data()
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.LUX])
 #server for render
@@ -371,48 +371,30 @@ def generate_table(dataframe, id):
     )
 
 
+
 app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
-
-    html.Div(children='''
-        Dash: A web application framework for Python.
-    '''),
-
-    dcc.Graph(
-        id='example-graph',
-        figure={
-            'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-            ],
-            'layout': {
-                'title': 'Dash Data Visualization'
-            }
-        }
-    )
-])
-# app.layout = html.Div(children=[
-#     #Storing the hitters selected in a df
-#     dcc.Store(id = 'sel_tbl', data = [], storage_type = 'memory'),
-#     #Storing the remaining number of games
-#     dcc.Store(id = 'games_rem', data = [], storage_type = 'memory'),
-#     #Storing the pitchers selected in a df
-#     dcc.Store(id = 'psel_tbl', data = [], storage_type = 'memory'),
-#     #Storing the remaining number of innings
-#     dcc.Store(id = 'inn_rem', data = [], storage_type = 'memory'), 
-#     #Storing team stats to be displayed in scatter plot  
-#     dcc.Store(id = 'team_stats', data = [], storage_type = 'memory'),
-#     html.Div(html.Label("MLB Build a Team"), style = {'text-align': 'center', 'font-size': '25px', 'vertical-align': 'top',
-#                                            'align': 'center', 'width': '100%', 'margin-top': '40px'}),              
-#     #PLAYER SELECTION
-#     #Multi DropDown for hitters
-#     html.Div(children = [
-#         html.Label(['Build your roster!', html.Br(),
-#         '1. Select any player since 1900', html.Br(), 
-#         '2. Choose a range of seasons that they played in', html.Br(),
-#         '3. Specify their games played or innings pitched', html.Br(),
-#         '4. Make sure to use all 1458 games and innings', html.Br(),
-#         '5. See how your team stacks up against MLB history', html.Br()], style={"border":"10px black solid", 'margin-bottom': '20px'}),
+    #Storing the hitters selected in a df
+    dcc.Store(id = 'sel_tbl', data = [], storage_type = 'memory'),
+    #Storing the remaining number of games
+    dcc.Store(id = 'games_rem', data = [], storage_type = 'memory'),
+    #Storing the pitchers selected in a df
+    dcc.Store(id = 'psel_tbl', data = [], storage_type = 'memory'),
+    #Storing the remaining number of innings
+    dcc.Store(id = 'inn_rem', data = [], storage_type = 'memory'), 
+    #Storing team stats to be displayed in scatter plot  
+    dcc.Store(id = 'team_stats', data = [], storage_type = 'memory'),
+    html.Div(html.Label("MLB Build a Team"), style = {'text-align': 'center', 'font-size': '25px', 'vertical-align': 'top',
+                                           'align': 'center', 'width': '100%', 'margin-top': '40px'}),              
+    #PLAYER SELECTION
+    #Multi DropDown for hitters
+    html.Div(children = [
+        html.Label(['Build your roster!', html.Br(),
+        '1. Select any player since 1900', html.Br(), 
+        '2. Choose a range of seasons that they played in', html.Br(),
+        '3. Specify their games played or innings pitched', html.Br(),
+        '4. Make sure to use all 1458 games and innings', html.Br(),
+        '5. See how your team stacks up against MLB history', html.Br()], style={"border":"10px black solid", 'margin-bottom': '20px'})])])
+        #,
 #         html.Div(children=[
 #             #HITTER, START YEAR, END YEAR
 #             html.Div(children = [
