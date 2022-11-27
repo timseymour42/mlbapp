@@ -408,259 +408,259 @@ app.layout = html.Div(children=[
                             {'label': c, 'value': c}
                             for c in ui_hit_df['Name'].unique()
                         ])
-                ])])])])])#,
-#                 #Start year
-#                 html.Label(['Start Year',
-#                 dcc.Dropdown(
-#                         id='start-year-dropdown', clearable=False,
-#                         style={'width':'100px'},
-#                         value=[curr_year], options=[
-#                             {'label': c, 'value': c}
-#                             for c in reversed(range(first_year, curr_year + 1, 1))
-#                         ])]), 
-#                 #End year
-#                 html.Label(['End Year',
-#                 dcc.Dropdown(
-#                         id='end-year-dropdown', clearable=False,
-#                         style={'width':'100px'},
-#                         value=[curr_year], options=[
-#                             {'label': c, 'value': c}
-#                             for c in reversed(range(first_year, curr_year + 1, 1))
-#                 ])])], style={'display': 'block', 'verticalAlign':'top'}),
-#             #HITTER, START YEAR, END YEAR
+                ]),
+                #Start year
+                html.Label(['Start Year',
+                dcc.Dropdown(
+                        id='start-year-dropdown', clearable=False,
+                        style={'width':'100px'},
+                        value=[curr_year], options=[
+                            {'label': c, 'value': c}
+                            for c in reversed(range(first_year, curr_year + 1, 1))
+                        ])]), 
+                #End year
+                html.Label(['End Year',
+                dcc.Dropdown(
+                        id='end-year-dropdown', clearable=False,
+                        style={'width':'100px'},
+                        value=[curr_year], options=[
+                            {'label': c, 'value': c}
+                            for c in reversed(range(first_year, curr_year + 1, 1))
+                ])])], style={'display': 'block', 'verticalAlign':'top'}),
+            #HITTER, START YEAR, END YEAR
 
-#             #GAME INPUT, SUBMIT HITTER, CLEAR PLAYER INFO
-#             #Input Box for games
-#             html.Div(children=[
-#                 html.Label(['Games', dcc.Input(id='game_input', type='number', min=1, max=games, step=1)], style={'width':'100px'}),
-#                 #Add Player Button
-#                 html.Button('Submit Hitter', id='submit-hitter', n_clicks=None, type = 'submit'),
-#                 #Clear Player info Button
-#                 html.Button('Clear Player Info', id='clear-player', n_clicks=None)], style={'display': 'block', 'verticalAlign':'top', 'width':'100%'}),
-#             #GAME INPUT,SUBMIT HITTER, CLEAR PLAYER INFO
+            #GAME INPUT, SUBMIT HITTER, CLEAR PLAYER INFO
+            #Input Box for games
+            html.Div(children=[
+                html.Label(['Games', dcc.Input(id='game_input', type='number', min=1, max=games, step=1)], style={'width':'100px'}),
+                #Add Player Button
+                html.Button('Submit Hitter', id='submit-hitter', n_clicks=None, type = 'submit'),
+                #Clear Player info Button
+                html.Button('Clear Player Info', id='clear-player', n_clicks=None)], style={'display': 'block', 'verticalAlign':'top', 'width':'100%'}),
+            #GAME INPUT,SUBMIT HITTER, CLEAR PLAYER INFO
 
-#             #CLEAR LINEUP        
-#             #Clear lineup button
-#             html.Button('Clear Lineup', id='clear-lineup', n_clicks=None, style = {'text-align': 'center'}),
-#             #CLEAR LINEUP
+            #CLEAR LINEUP        
+            #Clear lineup button
+            html.Button('Clear Lineup', id='clear-lineup', n_clicks=None, style = {'text-align': 'center'}),
+            #CLEAR LINEUP
 
-#             #GAMES REMAINING LABEL
-#             #Label for Games Remaining
-#             #HTML Table populated by DropDown; (Player, Years, Games)
-#             html.Div(children = [f'Hitters Selected; Games Remaining: {games}'], id = 'game'),
-#             #GAMES REMAINING LABEL
+            #GAMES REMAINING LABEL
+            #Label for Games Remaining
+            #HTML Table populated by DropDown; (Player, Years, Games)
+            html.Div(children = [f'Hitters Selected; Games Remaining: {games}'], id = 'game'),
+            #GAMES REMAINING LABEL
 
-#             #TABLE
-#             html.Div(children = [generate_table(hit_sel, 'hit_sel')], id = 'hit_sel_tbl')], style={'display':'block', 'width': '500px'}),
-#             #TABLE
+            #TABLE
+            html.Div(children = [generate_table(hit_sel, 'hit_sel')], id = 'hit_sel_tbl')], style={'display':'block', 'width': '500px'}),
+            #TABLE
         
-#         #PITCHER, START YEAR, END YEAR
-#         html.Div(children=[
-#             #Multi DropDown for pitchers
-#             html.Label([
-#                 "Pitcher",
-#                 dcc.Dropdown(
-#                     id='pitcher-dd-calc', clearable=True,
-#                     multi = False,
-#                     style={'width':'200px'},
-#                     value=[], options=[
-#                         {'label': c, 'value': c}
-#                         for c in ui_pitch_df['Name'].unique()
-#                     ])
-#             ]),
-#             #Start year
-#             html.Label(['Start Year',
-#             dcc.Dropdown(
-#                     id='start-year-dropdown-p', clearable=False,
-#                     style={'width':'100px'},
-#                     value=[curr_year], options=[
-#                         {'label': c, 'value': c}
-#                         for c in reversed(range(first_year, curr_year + 1, 1))
-#                     ])]), 
-#             #End year
-#             html.Label(['End Year',
-#             dcc.Dropdown(
-#                     id='end-year-dropdown-p', clearable=False,
-#                     style={'width':'100px'},
-#                     value=[curr_year], options=[
-#                         {'label': c, 'value': c}
-#                         for c in reversed(range(first_year, curr_year + 1, 1))
-#             ])])], style={'display': 'block', 'verticalAlign':'top', 'width':'100%'}),
-#             #PITCHER, START YEAR, END YEAR
+        #PITCHER, START YEAR, END YEAR
+        html.Div(children=[
+            #Multi DropDown for pitchers
+            html.Label([
+                "Pitcher",
+                dcc.Dropdown(
+                    id='pitcher-dd-calc', clearable=True,
+                    multi = False,
+                    style={'width':'200px'},
+                    value=[], options=[
+                        {'label': c, 'value': c}
+                        for c in ui_pitch_df['Name'].unique()
+                    ])
+            ]),
+            #Start year
+            html.Label(['Start Year',
+            dcc.Dropdown(
+                    id='start-year-dropdown-p', clearable=False,
+                    style={'width':'100px'},
+                    value=[curr_year], options=[
+                        {'label': c, 'value': c}
+                        for c in reversed(range(first_year, curr_year + 1, 1))
+                    ])]), 
+            #End year
+            html.Label(['End Year',
+            dcc.Dropdown(
+                    id='end-year-dropdown-p', clearable=False,
+                    style={'width':'100px'},
+                    value=[curr_year], options=[
+                        {'label': c, 'value': c}
+                        for c in reversed(range(first_year, curr_year + 1, 1))
+            ])])], style={'display': 'block', 'verticalAlign':'top', 'width':'100%'}),
+            #PITCHER, START YEAR, END YEAR
 
-#         html.Div(children=[
-#             #INNINGS INPUT, SUBMIT PICTHER, CLEAR PLAYER INFO
-#             #Input Box for innings
-#             html.Label(['Innings', dcc.Input(id='inn_input', type='number', min=1, max=innings, step=1)], style={'width':'100px'}),
-#             #Add Pitcher Button
-#             html.Button('Submit Pitcher', id='submit-pitcher', n_clicks=None),
-#             #Clear Pitcher info Button
-#             html.Button('Clear Pitcher Info', id='clear-pitcher', n_clicks=None)], style={'display': 'block', 'verticalAlign':'top', 'width':'100%'}),
-#             #INNINGS INPUT, SUBMIT PICTHER, CLEAR PLAYER INFO
+        html.Div(children=[
+            #INNINGS INPUT, SUBMIT PICTHER, CLEAR PLAYER INFO
+            #Input Box for innings
+            html.Label(['Innings', dcc.Input(id='inn_input', type='number', min=1, max=innings, step=1)], style={'width':'100px'}),
+            #Add Pitcher Button
+            html.Button('Submit Pitcher', id='submit-pitcher', n_clicks=None),
+            #Clear Pitcher info Button
+            html.Button('Clear Pitcher Info', id='clear-pitcher', n_clicks=None)], style={'display': 'block', 'verticalAlign':'top', 'width':'100%'}),
+            #INNINGS INPUT, SUBMIT PICTHER, CLEAR PLAYER INFO
 
-#         #CLEAR ROTATION
-#         #Clear rotation button
-#         html.Button('Clear Rotation', id='clear-rotation', n_clicks=None, style = {'text-align': 'center'}),
-#         #CLEAR ROTATION
+        #CLEAR ROTATION
+        #Clear rotation button
+        html.Button('Clear Rotation', id='clear-rotation', n_clicks=None, style = {'text-align': 'center'}),
+        #CLEAR ROTATION
 
-#         #INNINGS REMAINING LABEL
-#         #Label for Innings Remaining
-#         #HTML Table populated by DropDown; (Player, Years, Innings)
-#         html.Div(children = [f'Pitchers Selected; Games Remaining: {innings}'], id = 'inn'),
-#         #INNINGS REMAINING LABEL
+        #INNINGS REMAINING LABEL
+        #Label for Innings Remaining
+        #HTML Table populated by DropDown; (Player, Years, Innings)
+        html.Div(children = [f'Pitchers Selected; Games Remaining: {innings}'], id = 'inn'),
+        #INNINGS REMAINING LABEL
 
-#         #TABLE
-#         html.Div(children = [generate_table(pit_sel, 'pit_sel')], id = 'pit_sel_tbl'),
-#         #TABLE
+        #TABLE
+        html.Div(children = [generate_table(pit_sel, 'pit_sel')], id = 'pit_sel_tbl'),
+        #TABLE
 
 
-#         #Submit Buttom that is only clickable when innings and games remaining are 0
-#         html.Button('Submit Team', id='sub-team', n_clicks=None, style = {'margin-left': '55px'}),
-#         html.Div(children = ['Wins: '], id = 'team-wins-prediction', style={'margin-top': '20px', 'margin-left': '10px'}),
-#         ], style = {'display': 'inline-block', 'margin-top': '100px', 'vertical-align': 'top', 'margin-left':'100px'}),
-#     #Creative Lineup Comparison Graph
-#     html.Div(children = [
+        #Submit Buttom that is only clickable when innings and games remaining are 0
+        html.Button('Submit Team', id='sub-team', n_clicks=None, style = {'margin-left': '55px'}),
+        html.Div(children = ['Wins: '], id = 'team-wins-prediction', style={'margin-top': '20px', 'margin-left': '10px'}),
+        ], style = {'display': 'inline-block', 'margin-top': '100px', 'vertical-align': 'top', 'margin-left':'100px'}),
+    #Creative Lineup Comparison Graph
+    html.Div(children = [
         
-#         dcc.Graph(id = 'team-wins', style={'width': '90vh', 'height': '90vh', 'text-align': 'center'}),
-#         #Dropdowns for querying team wins graph
-#         #Start year
-#         html.Div(children = [
-#         html.Div(
-#             html.Label(['Start Year', 
-#             dcc.Dropdown(
-#                     id='start-year-dropdown-g', clearable=False,
-#                     style={'width':'160px'},
-#                     value=[], options=[
-#                         {'label': c, 'value': c}
-#                         for c in range(first_year, curr_year + 1, 1)
-#                     ])]), style = {'display': 'inline-block', 'width': '20%', 'margin-left': '55px'}), 
-#         #End year
-#         html.Div(
-#             html.Label(['End Year',
-#             dcc.Dropdown(
-#                     id='end-year-dropdown-g', clearable=False,
-#                     style={'width':'160px'},
-#                     value=[], options=[
-#                         {'label': c, 'value': c}
-#                         for c in range(first_year, curr_year + 1, 1)
-#             ])]), style = {'display': 'inline-block', "margin-left": "15px", 'width': '20%'}),
-#         html.Div(
-#             html.Label([
-#                 "Team",
-#                 dcc.Dropdown(
-#                     id='team-graph', clearable=True,
-#                     style={'width':'160px'},
-#                     multi=True,
-#                     value=[], options=[
-#                         {'label': c, 'value': c}
-#                         for c in ui_hit_df['Team'].unique()
-#                     ])
-#             ]), style = {'display': 'inline-block', "margin-left": "15px", 'width': '20%'}),
-#         html.Div(
-#             html.Label([ 'Stat',
-#             dcc.Dropdown(
-#                     id='stat-dd', clearable=False,
-#                     style={'width':'160px'},
-#                     value=[], options=[
-#                         'wRC+', 'HR/9', 'BsR', 'WAR_y', 'Def', 'SLG'
-#                     ])]), style = {'display': 'inline-block', "margin-left": "15px", 'width': '20%'}),
-#         ], style = {'display': 'inline-block', 'width': '100%'})
+        dcc.Graph(id = 'team-wins', style={'width': '90vh', 'height': '90vh', 'text-align': 'center'}),
+        #Dropdowns for querying team wins graph
+        #Start year
+        html.Div(children = [
+        html.Div(
+            html.Label(['Start Year', 
+            dcc.Dropdown(
+                    id='start-year-dropdown-g', clearable=False,
+                    style={'width':'160px'},
+                    value=[], options=[
+                        {'label': c, 'value': c}
+                        for c in range(first_year, curr_year + 1, 1)
+                    ])]), style = {'display': 'inline-block', 'width': '20%', 'margin-left': '55px'}), 
+        #End year
+        html.Div(
+            html.Label(['End Year',
+            dcc.Dropdown(
+                    id='end-year-dropdown-g', clearable=False,
+                    style={'width':'160px'},
+                    value=[], options=[
+                        {'label': c, 'value': c}
+                        for c in range(first_year, curr_year + 1, 1)
+            ])]), style = {'display': 'inline-block', "margin-left": "15px", 'width': '20%'}),
+        html.Div(
+            html.Label([
+                "Team",
+                dcc.Dropdown(
+                    id='team-graph', clearable=True,
+                    style={'width':'160px'},
+                    multi=True,
+                    value=[], options=[
+                        {'label': c, 'value': c}
+                        for c in ui_hit_df['Team'].unique()
+                    ])
+            ]), style = {'display': 'inline-block', "margin-left": "15px", 'width': '20%'}),
+        html.Div(
+            html.Label([ 'Stat',
+            dcc.Dropdown(
+                    id='stat-dd', clearable=False,
+                    style={'width':'160px'},
+                    value=[], options=[
+                        'wRC+', 'HR/9', 'BsR', 'WAR_y', 'Def', 'SLG'
+                    ])]), style = {'display': 'inline-block', "margin-left": "15px", 'width': '20%'}),
+        ], style = {'display': 'inline-block', 'width': '100%'})
 
-#         ], style = {'display': 'inline-block', "margin-left": "50px"}),
-#     html.Label(['Search through a database of every player since 1900 (>, <, = may be helpful in filter row)'], 
-#     style={'margin-left': '500px', 'margin-top': '60px', 'font-size':'20px', 'font-weight': 'bold'}),
-#     #HITTER SECTION
-#     # Team Dropdown for hitter table
-#     html.Div(children = [
-#         html.Label([
-#             "Team",
-#             dcc.Dropdown(
-#                 id='team-hit', clearable=True,
-#                 style={'width':'100px'},
-#                 multi=True,
-#                 value=[], options=[
-#                     {'label': c, 'value': c}
-#                     for c in ui_hit_df['Team'].unique()
-#                 ])
-#         ]),
-#         # Hitter Dropdown
-#         html.Label([
-#             "Hitter",
-#             dcc.Dropdown(
-#                 id='hitter-dropdown', clearable=True,
-#                 style={'width':'200px'},
-#                 multi = True,
-#                 value=[], options=[
-#                     {'label': c, 'value': c}
-#                     for c in ui_hit_df['Name'].unique()
-#                 ])
-#         ]),
-#         #hitter research table
-#         dash_table.DataTable(
-#         data=ui_hit_df.to_dict('records'), ####### inserted line
-#         columns = [{'id': c, 'name': c} for c in ui_hit_df.columns], ####### inserted line
-#             id='htable',
-#             filter_action='native',
-#             row_selectable='single',
-#             editable=False,
-#             sort_action="native",
-#             sort_mode="multi",
-#             column_selectable="single",
-#             row_deletable=True,
-#             selected_columns=[],
-#             selected_rows=[],
-#             page_action="native",
-#             page_current= 0,
-#             page_size= 10,
-#             hidden_columns = ['AB', 'TB']
-#         )], style = {'display': 'inline-block', 'margin-left':'50px'}),
-#     html.Div([
-#     #PITCHER SECTION
-#     # Team Dropdown for pitcher table
-#     html.Label([
-#         "Team",
-#         dcc.Dropdown(
-#             id='team-pitch', clearable=True,
-#             style={'width':'100px'},
-#             multi=True,
-#             value=[], options=[
-#                 {'label': c, 'value': c}
-#                 for c in ui_pitch_df['Team'].unique()
-#             ])
-#     ]),
-#     # Pitcher Dropdown
-#     html.Label([
-#         "Pitcher",
-#         dcc.Dropdown(
-#             id='pitcher-dropdown', clearable=True,
-#             style={'width':'200px'},
-#             multi = True,
-#             value=[], options=[
-#                 {'label': c, 'value': c}
-#                 for c in ui_pitch_df['Name'].unique()
-#             ])
-#     ]),
-#     #pitcher research table
-#     dash_table.DataTable(
-#        data=ui_pitch_df.to_dict('records'), ####### inserted line
-#        columns = [{'id': c, 'name': c} for c in ui_pitch_df.columns], ####### inserted line
-#         id='ptable',
-#         filter_action='native',
-#         row_selectable='single',
-#         editable=False,
-#         sort_action="native",
-#         sort_mode="multi",
-#         column_selectable="single",
-#         row_deletable=True,
-#         selected_columns=[],
-#         selected_rows=[],
-#         page_action="native",
-#         page_current= 0,
-#         page_size= 10,
-#         hidden_columns = ['HR']
-#     )], style={'margin-left':'50px'})
+        ], style = {'display': 'inline-block', "margin-left": "50px"}),
+    html.Label(['Search through a database of every player since 1900 (>, <, = may be helpful in filter row)'], 
+    style={'margin-left': '500px', 'margin-top': '60px', 'font-size':'20px', 'font-weight': 'bold'}),
+    #HITTER SECTION
+    # Team Dropdown for hitter table
+    html.Div(children = [
+        html.Label([
+            "Team",
+            dcc.Dropdown(
+                id='team-hit', clearable=True,
+                style={'width':'100px'},
+                multi=True,
+                value=[], options=[
+                    {'label': c, 'value': c}
+                    for c in ui_hit_df['Team'].unique()
+                ])
+        ]),
+        # Hitter Dropdown
+        html.Label([
+            "Hitter",
+            dcc.Dropdown(
+                id='hitter-dropdown', clearable=True,
+                style={'width':'200px'},
+                multi = True,
+                value=[], options=[
+                    {'label': c, 'value': c}
+                    for c in ui_hit_df['Name'].unique()
+                ])
+        ]),
+        #hitter research table
+        # dash_table.DataTable(
+        # data=ui_hit_df.to_dict('records'), ####### inserted line
+        # columns = [{'id': c, 'name': c} for c in ui_hit_df.columns], ####### inserted line
+        #     id='htable',
+        #     filter_action='native',
+        #     row_selectable='single',
+        #     editable=False,
+        #     sort_action="native",
+        #     sort_mode="multi",
+        #     column_selectable="single",
+        #     row_deletable=True,
+        #     selected_columns=[],
+        #     selected_rows=[],
+        #     page_action="native",
+        #     page_current= 0,
+        #     page_size= 10,
+        #     hidden_columns = ['AB', 'TB']
+        # )], style = {'display': 'inline-block', 'margin-left':'50px'}),
+    html.Div([
+    #PITCHER SECTION
+    # Team Dropdown for pitcher table
+    html.Label([
+        "Team",
+        dcc.Dropdown(
+            id='team-pitch', clearable=True,
+            style={'width':'100px'},
+            multi=True,
+            value=[], options=[
+                {'label': c, 'value': c}
+                for c in ui_pitch_df['Team'].unique()
+            ])
+    ]),
+    # Pitcher Dropdown
+    html.Label([
+        "Pitcher",
+        dcc.Dropdown(
+            id='pitcher-dropdown', clearable=True,
+            style={'width':'200px'},
+            multi = True,
+            value=[], options=[
+                {'label': c, 'value': c}
+                for c in ui_pitch_df['Name'].unique()
+            ])
+    ]),
+    #pitcher research table
+    # dash_table.DataTable(
+    #    data=ui_pitch_df.to_dict('records'), ####### inserted line
+    #    columns = [{'id': c, 'name': c} for c in ui_pitch_df.columns], ####### inserted line
+    #     id='ptable',
+    #     filter_action='native',
+    #     row_selectable='single',
+    #     editable=False,
+    #     sort_action="native",
+    #     sort_mode="multi",
+    #     column_selectable="single",
+    #     row_deletable=True,
+    #     selected_columns=[],
+    #     selected_rows=[],
+    #     page_action="native",
+    #     page_current= 0,
+    #     page_size= 10,
+    #     hidden_columns = ['HR']
+    # )], style={'margin-left':'50px'})
     
-# ])
+])])])
 
 # #HITTER RESEARCH SECTION CALLBACKS
 # @app.callback(Output('htable', 'columns'), [Input('team-hit', 'value'), 
