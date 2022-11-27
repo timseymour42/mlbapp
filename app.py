@@ -408,7 +408,7 @@ app.layout = html.Div(children=[
                             {'label': c, 'value': c}
                             for c in ui_hit_df['Name'].unique()
                         ])
-                ])])])])#,
+                ])])])])])#,
 #                 #Start year
 #                 html.Label(['Start Year',
 #                 dcc.Dropdown(
