@@ -663,213 +663,213 @@ app.layout = html.Div(children=[
     )], style={'margin-left':'50px'})])
     
 
-# #HITTER RESEARCH SECTION CALLBACKS
-# @app.callback(Output('htable', 'columns'), [Input('team-hit', 'value'), 
-#                                            Input('hitter-dropdown', 'value')])
-# def update_columns(teams, hitters):
-#     return [{"name": i, "id": i} for i in ui_hit_df.columns]
+#HITTER RESEARCH SECTION CALLBACKS
+@app.callback(Output('htable', 'columns'), [Input('team-hit', 'value'), 
+                                           Input('hitter-dropdown', 'value')])
+def update_columns(teams, hitters):
+    return [{"name": i, "id": i} for i in ui_hit_df.columns]
     
-# @app.callback(Output('htable', 'data'), [Input('team-hit', 'value'),
-#                                         Input('hitter-dropdown', 'value')])
-# def update_data(teams, hitters):
-#   '''
-#   Args: 
-#     teams: selected teams
-#     htiters: selected hitters
-#   '''
-#   if teams and hitters:
-#     a = ui_hit_df.loc[(ui_hit_df.Team.isin(teams)) & (ui_hit_df.Name.isin(hitters))]
-#     return a.to_dict('records')
-#   elif teams:
-#     a = ui_hit_df.loc[(ui_hit_df.Team.isin(teams))]
-#     return a.to_dict('records')
-#   elif hitters:
-#     a = ui_hit_df.loc[(ui_hit_df.Name.isin(hitters))]
-#     return a.to_dict('records')
-#   return ui_hit_df.to_dict('records')
+@app.callback(Output('htable', 'data'), [Input('team-hit', 'value'),
+                                        Input('hitter-dropdown', 'value')])
+def update_data(teams, hitters):
+  '''
+  Args: 
+    teams: selected teams
+    htiters: selected hitters
+  '''
+  if teams and hitters:
+    a = ui_hit_df.loc[(ui_hit_df.Team.isin(teams)) & (ui_hit_df.Name.isin(hitters))]
+    return a.to_dict('records')
+  elif teams:
+    a = ui_hit_df.loc[(ui_hit_df.Team.isin(teams))]
+    return a.to_dict('records')
+  elif hitters:
+    a = ui_hit_df.loc[(ui_hit_df.Name.isin(hitters))]
+    return a.to_dict('records')
+  return ui_hit_df.to_dict('records')
 
-# #PITCHER RESEARCH SECTION CALLBACKS
-# @app.callback(Output('ptable', 'columns'), [Input('team-pitch', 'value'), 
-#               Input('pitcher-dropdown', 'value')])
-# def update_columns(teams, pitchers):
-#     return [{"name": i, "id": i} for i in ui_pitch_df.columns]
+#PITCHER RESEARCH SECTION CALLBACKS
+@app.callback(Output('ptable', 'columns'), [Input('team-pitch', 'value'), 
+              Input('pitcher-dropdown', 'value')])
+def update_columns(teams, pitchers):
+    return [{"name": i, "id": i} for i in ui_pitch_df.columns]
     
-# @app.callback(Output('ptable', 'data'), [Input('team-pitch', 'value'),
-#                                         Input('pitcher-dropdown', 'value')])
-# def update_data(teams, pitchers):
-#   '''
-#   Args: 
-#     teams: selected teams
-#     htiters: selected hitters
-#   '''
-#   if teams and pitchers:
-#     a= ui_pitch_df.loc[(ui_pitch_df.Team.isin(teams)) & (ui_pitch_df.Name.isin(pitchers))]
-#     return a.to_dict('records')
-#   elif teams:
-#     a= ui_pitch_df.loc[(ui_pitch_df.Team.isin(teams))]
-#     return a.to_dict('records')
-#   elif pitchers:
-#     a= ui_pitch_df.loc[(ui_pitch_df.Name.isin(pitchers))]
-#     return a.to_dict('records')
-#   return ui_pitch_df.to_dict('records')
+@app.callback(Output('ptable', 'data'), [Input('team-pitch', 'value'),
+                                        Input('pitcher-dropdown', 'value')])
+def update_data(teams, pitchers):
+  '''
+  Args: 
+    teams: selected teams
+    htiters: selected hitters
+  '''
+  if teams and pitchers:
+    a= ui_pitch_df.loc[(ui_pitch_df.Team.isin(teams)) & (ui_pitch_df.Name.isin(pitchers))]
+    return a.to_dict('records')
+  elif teams:
+    a= ui_pitch_df.loc[(ui_pitch_df.Team.isin(teams))]
+    return a.to_dict('records')
+  elif pitchers:
+    a= ui_pitch_df.loc[(ui_pitch_df.Name.isin(pitchers))]
+    return a.to_dict('records')
+  return ui_pitch_df.to_dict('records')
 
-# #CALLBACK FOR PLAYER SUBMISSION
-# @app.callback([Output('hit_sel_tbl', 'children'), Output('game', 'children'),
-#                Output('sel_tbl', 'data'), Output('games_rem', 'data'),
-#                Output('submit-hitter', 'n_clicks'), Output('clear-lineup', 'n_clicks'), 
-#                Output('game_input', 'max')],
-#               [Input('hitter-dd-calc', 'value'), Input('start-year-dropdown', 'value'),
-#               Input('end-year-dropdown', 'value'), Input('game_input', 'value'),
-#               Input('submit-hitter', 'n_clicks'), Input('clear-lineup', 'n_clicks'),
-#               State('sel_tbl', 'data'), State('games_rem', 'data')])
-# def update_lineup(hitter, start_year, end_year, game_input, button, cl_button, sel_tbl, gs):
-#     #clearing the lineup
-#     if (cl_button):
-#         hitters = pd.DataFrame(columns = ['Name', 'Years', 'Games'])
-#         return generate_table(hitters, 'hit_sel'), 'Hitters Selected; Games Remaining: 1458', [], 1458, None, None, 1458 
-#     if len(sel_tbl) == 0:
-#         hitters = pd.DataFrame(columns = ['Name', 'Years', 'Games'])
-#     else:
-#         hitters = pd.DataFrame(sel_tbl['data-frame'])
-#     if type(gs) == list:
-#         gms = 1458
-#     else:
-#         gms = gs
-#     if (hitter and start_year and end_year and game_input and button and (gms - game_input >= 0)):
-#         years = f'{start_year} - {end_year}'
-#         hitters = hitters.append({'Name': hitter, 'Years': years, 'Games': game_input}, ignore_index = True)
-#         gms = gms - game_input
-#     table = generate_table(hitters, 'hit_sel')
-#     new_text = 'Hitters Selected; Games Remaining: ' + str(gms)
-#     df = {'data-frame': hitters.to_dict('records')}
-#     return (table, new_text, df, gms, None, None, gms)
-
-
-# #CLEARING DROPDOWNS UPON PLAYER SUBMISSION
-# @app.callback([Output('hitter-dd-calc', 'value'), Output('start-year-dropdown', 'value'),
-#               Output('end-year-dropdown', 'value'), Output('game_input', 'value')],
-#               [Input('clear-player', 'n_clicks')])
-# def reset_dropdowns(button):
-#     return None, None, None, None  
-
-# #PITCHER SELECTION
-
-# #CALLBACK FOR PLAYER SUBMISSION
-# @app.callback([Output('pit_sel_tbl', 'children'), Output('inn', 'children'),
-#                Output('psel_tbl', 'data'), Output('inn_rem', 'data'),
-#                Output('submit-pitcher', 'n_clicks'), Output('clear-rotation', 'n_clicks'), 
-#                Output('inn_input', 'max')],
-#               [Input('pitcher-dd-calc', 'value'), Input('start-year-dropdown-p', 'value'),
-#               Input('end-year-dropdown-p', 'value'), Input('inn_input', 'value'),
-#               Input('submit-pitcher', 'n_clicks'), Input('clear-rotation', 'n_clicks'),
-#               State('psel_tbl', 'data'), State('inn_rem', 'data')])
-# def update_rotation(pitcher, start_year, end_year, inn_input, button, cl_button, psel_tbl, inn):
-#     #clearing the rotation
-#     if (cl_button):
-#         pitchers = pd.DataFrame(columns = ['Name', 'Years', 'Innings'])
-#         return generate_table(pitchers, 'hit_sel'), 'Pitchers Selected; Innings Remaining: 1458', [], 1458, None, None, 1458 
-#     if len(psel_tbl) == 0:
-#         pitchers = pd.DataFrame(columns = ['Name', 'Years', 'Innings'])
-#     else:
-#         pitchers = pd.DataFrame(psel_tbl['data-frame'])
-#     if type(inn) == list:
-#         inns = 1458
-#     else:
-#         inns = inn
-#     if (pitcher and start_year and end_year and inn_input and button and (inns - inn_input >= 0)):
-#         years = f'{start_year} - {end_year}'
-#         pitchers = pitchers.append({'Name': pitcher, 'Years': years, 'Innings': inn_input}, ignore_index = True)
-#         inns = inns - inn_input
-#     table = generate_table(pitchers, 'pit_sel')
-#     new_text = 'Pitchers Selected; Innings Remaining: ' + str(inns)
-#     df = {'data-frame': pitchers.to_dict('records')}
-#     return (table, new_text, df, inns, None, None, inns)
+#CALLBACK FOR PLAYER SUBMISSION
+@app.callback([Output('hit_sel_tbl', 'children'), Output('game', 'children'),
+               Output('sel_tbl', 'data'), Output('games_rem', 'data'),
+               Output('submit-hitter', 'n_clicks'), Output('clear-lineup', 'n_clicks'), 
+               Output('game_input', 'max')],
+              [Input('hitter-dd-calc', 'value'), Input('start-year-dropdown', 'value'),
+              Input('end-year-dropdown', 'value'), Input('game_input', 'value'),
+              Input('submit-hitter', 'n_clicks'), Input('clear-lineup', 'n_clicks'),
+              State('sel_tbl', 'data'), State('games_rem', 'data')])
+def update_lineup(hitter, start_year, end_year, game_input, button, cl_button, sel_tbl, gs):
+    #clearing the lineup
+    if (cl_button):
+        hitters = pd.DataFrame(columns = ['Name', 'Years', 'Games'])
+        return generate_table(hitters, 'hit_sel'), 'Hitters Selected; Games Remaining: 1458', [], 1458, None, None, 1458 
+    if len(sel_tbl) == 0:
+        hitters = pd.DataFrame(columns = ['Name', 'Years', 'Games'])
+    else:
+        hitters = pd.DataFrame(sel_tbl['data-frame'])
+    if type(gs) == list:
+        gms = 1458
+    else:
+        gms = gs
+    if (hitter and start_year and end_year and game_input and button and (gms - game_input >= 0)):
+        years = f'{start_year} - {end_year}'
+        hitters = hitters.append({'Name': hitter, 'Years': years, 'Games': game_input}, ignore_index = True)
+        gms = gms - game_input
+    table = generate_table(hitters, 'hit_sel')
+    new_text = 'Hitters Selected; Games Remaining: ' + str(gms)
+    df = {'data-frame': hitters.to_dict('records')}
+    return (table, new_text, df, gms, None, None, gms)
 
 
-# #CLEARING DROPDOWNS UPON PLAYER SUBMISSION
-# @app.callback([Output('pitcher-dd-calc', 'value'), Output('start-year-dropdown-p', 'value'),
-#               Output('end-year-dropdown-p', 'value'), Output('inn_input', 'value'),
-#               Output('clear-pitcher', 'n_clicks')],
-#               [Input('clear-pitcher', 'n_clicks')])
-# def reset_p_dropdowns(button):
-#       return None, None, None, None, None 
+#CLEARING DROPDOWNS UPON PLAYER SUBMISSION
+@app.callback([Output('hitter-dd-calc', 'value'), Output('start-year-dropdown', 'value'),
+              Output('end-year-dropdown', 'value'), Output('game_input', 'value')],
+              [Input('clear-player', 'n_clicks')])
+def reset_dropdowns(button):
+    return None, None, None, None  
 
-# #UPDATING THE GRAPH BASED ON WHICH STAT TO DISPLAY, WHICH TEAM, AND WHICH YEAR
-# @app.callback(Output('team-wins', 'figure'),
-#               [Input('team-graph', 'value'), Input('start-year-dropdown-g', 'value'),
-#               Input('end-year-dropdown-g', 'value'), Input('stat-dd', 'value'),
-#               Input('team_stats', 'data'), Input('sub-team', 'n_clicks')])
-# def update_figure(team, sy, ey, stat, team_stats, sub_team):
-#     a = team_history.copy()
-#     s = 'wRC+'
-#     if team and sy and ey:
-#         a = a.loc[(a.Team.isin(team)) & (a.Season >= sy) & (a.Season <= ey)]
-#     elif sy and ey:
-#         a = a.loc[(a.Season >= sy) & (a.Season <= ey)]
-#     elif team:
-#         a = a.loc[(a.Team.isin(team))]
-#     if stat:
-#         s = stat
-#     a['my_team'] = False
-#     if sub_team and team_stats:
-#         team_stats['my_team'] = True
-#         a = a.append(team_stats, ignore_index = True)
+#PITCHER SELECTION
+
+#CALLBACK FOR PLAYER SUBMISSION
+@app.callback([Output('pit_sel_tbl', 'children'), Output('inn', 'children'),
+               Output('psel_tbl', 'data'), Output('inn_rem', 'data'),
+               Output('submit-pitcher', 'n_clicks'), Output('clear-rotation', 'n_clicks'), 
+               Output('inn_input', 'max')],
+              [Input('pitcher-dd-calc', 'value'), Input('start-year-dropdown-p', 'value'),
+              Input('end-year-dropdown-p', 'value'), Input('inn_input', 'value'),
+              Input('submit-pitcher', 'n_clicks'), Input('clear-rotation', 'n_clicks'),
+              State('psel_tbl', 'data'), State('inn_rem', 'data')])
+def update_rotation(pitcher, start_year, end_year, inn_input, button, cl_button, psel_tbl, inn):
+    #clearing the rotation
+    if (cl_button):
+        pitchers = pd.DataFrame(columns = ['Name', 'Years', 'Innings'])
+        return generate_table(pitchers, 'hit_sel'), 'Pitchers Selected; Innings Remaining: 1458', [], 1458, None, None, 1458 
+    if len(psel_tbl) == 0:
+        pitchers = pd.DataFrame(columns = ['Name', 'Years', 'Innings'])
+    else:
+        pitchers = pd.DataFrame(psel_tbl['data-frame'])
+    if type(inn) == list:
+        inns = 1458
+    else:
+        inns = inn
+    if (pitcher and start_year and end_year and inn_input and button and (inns - inn_input >= 0)):
+        years = f'{start_year} - {end_year}'
+        pitchers = pitchers.append({'Name': pitcher, 'Years': years, 'Innings': inn_input}, ignore_index = True)
+        inns = inns - inn_input
+    table = generate_table(pitchers, 'pit_sel')
+    new_text = 'Pitchers Selected; Innings Remaining: ' + str(inns)
+    df = {'data-frame': pitchers.to_dict('records')}
+    return (table, new_text, df, inns, None, None, inns)
+
+
+#CLEARING DROPDOWNS UPON PLAYER SUBMISSION
+@app.callback([Output('pitcher-dd-calc', 'value'), Output('start-year-dropdown-p', 'value'),
+              Output('end-year-dropdown-p', 'value'), Output('inn_input', 'value'),
+              Output('clear-pitcher', 'n_clicks')],
+              [Input('clear-pitcher', 'n_clicks')])
+def reset_p_dropdowns(button):
+      return None, None, None, None, None 
+
+#UPDATING THE GRAPH BASED ON WHICH STAT TO DISPLAY, WHICH TEAM, AND WHICH YEAR
+@app.callback(Output('team-wins', 'figure'),
+              [Input('team-graph', 'value'), Input('start-year-dropdown-g', 'value'),
+              Input('end-year-dropdown-g', 'value'), Input('stat-dd', 'value'),
+              Input('team_stats', 'data'), Input('sub-team', 'n_clicks')])
+def update_figure(team, sy, ey, stat, team_stats, sub_team):
+    a = team_history.copy()
+    s = 'wRC+'
+    if team and sy and ey:
+        a = a.loc[(a.Team.isin(team)) & (a.Season >= sy) & (a.Season <= ey)]
+    elif sy and ey:
+        a = a.loc[(a.Season >= sy) & (a.Season <= ey)]
+    elif team:
+        a = a.loc[(a.Team.isin(team))]
+    if stat:
+        s = stat
+    a['my_team'] = False
+    if sub_team and team_stats:
+        team_stats['my_team'] = True
+        a = a.append(team_stats, ignore_index = True)
     
-#     fig = px.scatter(a, x = s, y = 'W', hover_data={'Team':':%s', 'Season':':.0f', 'wRC+':':.2f', 'HR/9':':.2f', 'BsR':':.2f', 'WAR_y':':.2f', 'Def':':.2f', 'SLG':':.2f'}, 
-#                     color = 'my_team', title='MLB Team Seasons', labels={'W': 'Wins'}).update_layout(title_x=.5)
-#     return fig
+    fig = px.scatter(a, x = s, y = 'W', hover_data={'Team':':%s', 'Season':':.0f', 'wRC+':':.2f', 'HR/9':':.2f', 'BsR':':.2f', 'WAR_y':':.2f', 'Def':':.2f', 'SLG':':.2f'}, 
+                    color = 'my_team', title='MLB Team Seasons', labels={'W': 'Wins'}).update_layout(title_x=.5)
+    return fig
 
-# #SUBMITTING A LINEUP
-# @app.callback(Output('team_stats', 'data'), Output('team-wins-prediction', 'children'),
-#               Input('sub-team', 'n_clicks'), State('psel_tbl', 'data'),
-#               State('sel_tbl', 'data'), State('games_rem', 'data'),
-#               State('inn_rem', 'data')
-# )
-# def submit_team(submit, pit_sel_tbl, hit_sel_tbl, gs, inn):
-#     if submit is None:
-#         raise PreventUpdate
-#     reg_stats = {}
-#     wins = ''
-#     if submit and (gs == 0) and (inn == 0):
-#         # convert hitters in hitter objects
-#         hitters = np.array([])
-#         for h in hit_sel_tbl['data-frame']:
-#             # Parsing seasons string from hit_sel_tbl
-#             seasons = h['Years']
-#             first = int(seasons[:4])
-#             second = int(seasons[-4:])
-#             ##########
-#             # checking to see that first is less than second
-#             if (first <= second):
-#                 yr_range = list(range(first, second + 1, 1))
-#             else:
-#                 yr_range = list(range(second, first + 1, 1))
-#             player = hitter(h['Name'], yr_range, h['Games'])
-#             hitters = np.append(hitters, player)
-#         pitchers = np.array([])
-#         for p in pit_sel_tbl['data-frame']:
-#             # Parsing seasons string from hit_sel_tbl
-#             seasons = p['Years']
-#             first = int(seasons[:4])
-#             second = int(seasons[-4:])
-#             # checking to see that first is less than second
-#             if (first <= second):
-#                 yr_range = list(range(first, second + 1, 1))
-#             else:
-#                 yr_range = list(range(second, first + 1, 1))
-#             player = pitcher(p['Name'], yr_range, p['Innings'])
-#             pitchers = np.append(pitchers, player)
+#SUBMITTING A LINEUP
+@app.callback(Output('team_stats', 'data'), Output('team-wins-prediction', 'children'),
+              Input('sub-team', 'n_clicks'), State('psel_tbl', 'data'),
+              State('sel_tbl', 'data'), State('games_rem', 'data'),
+              State('inn_rem', 'data')
+)
+def submit_team(submit, pit_sel_tbl, hit_sel_tbl, gs, inn):
+    if submit is None:
+        raise PreventUpdate
+    reg_stats = {}
+    wins = ''
+    if submit and (gs == 0) and (inn == 0):
+        # convert hitters in hitter objects
+        hitters = np.array([])
+        for h in hit_sel_tbl['data-frame']:
+            # Parsing seasons string from hit_sel_tbl
+            seasons = h['Years']
+            first = int(seasons[:4])
+            second = int(seasons[-4:])
+            ##########
+            # checking to see that first is less than second
+            if (first <= second):
+                yr_range = list(range(first, second + 1, 1))
+            else:
+                yr_range = list(range(second, first + 1, 1))
+            player = hitter(h['Name'], yr_range, h['Games'])
+            hitters = np.append(hitters, player)
+        pitchers = np.array([])
+        for p in pit_sel_tbl['data-frame']:
+            # Parsing seasons string from hit_sel_tbl
+            seasons = p['Years']
+            first = int(seasons[:4])
+            second = int(seasons[-4:])
+            # checking to see that first is less than second
+            if (first <= second):
+                yr_range = list(range(first, second + 1, 1))
+            else:
+                yr_range = list(range(second, first + 1, 1))
+            player = pitcher(p['Name'], yr_range, p['Innings'])
+            pitchers = np.append(pitchers, player)
 
-#         # hitters and pitchers should be full and contain enough info to make predictions
-#         # make predictions
-#         wins, reg_stats = wins_for_team(hitters, pitchers)
-#         reg_stats['Team'] = 'my_team'
-#         reg_stats['Season'] = 2022
-#         reg_stats['W'] = wins
-#         reg_stats['WAR_y'] = reg_stats.pop('WAR') * 162
-#         reg_stats['Def'] = reg_stats['Def'] * 162
-#         reg_stats['BsR'] = reg_stats['BsR'] * 162
-#     return reg_stats, f'Wins: {wins}'
+        # hitters and pitchers should be full and contain enough info to make predictions
+        # make predictions
+        wins, reg_stats = wins_for_team(hitters, pitchers)
+        reg_stats['Team'] = 'my_team'
+        reg_stats['Season'] = 2022
+        reg_stats['W'] = wins
+        reg_stats['WAR_y'] = reg_stats.pop('WAR') * 162
+        reg_stats['Def'] = reg_stats['Def'] * 162
+        reg_stats['BsR'] = reg_stats['BsR'] * 162
+    return reg_stats, f'Wins: {wins}'
 
 if __name__ == '__main__':
     app.run_server(debug=True)
