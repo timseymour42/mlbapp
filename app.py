@@ -595,7 +595,7 @@ app.layout = html.Div(children=[
                     for c in ui_hit_df['Name'].unique()
                 ])
         ]),
-        hitter research table
+        # hitter research table
         dash_table.DataTable(
         data=ui_hit_df.to_dict('records'), ####### inserted line
         columns = [{'id': c, 'name': c} for c in ui_hit_df.columns], ####### inserted line
@@ -640,7 +640,7 @@ app.layout = html.Div(children=[
                 for c in ui_pitch_df['Name'].unique()
             ])
     ]),
-    pitcher research table
+    # pitcher research table
     dash_table.DataTable(
        data=ui_pitch_df.to_dict('records'), ####### inserted line
        columns = [{'id': c, 'name': c} for c in ui_pitch_df.columns], ####### inserted line
