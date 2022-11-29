@@ -609,10 +609,10 @@ app.layout = html.Div(children=[
             row_deletable=True,
             selected_columns=[],
             selected_rows=[],
-            page_action="none",
-            page_current= 0,
+            page_action="custom",
+            page_current=0,
             virtualization=True,
-            page_size= 10,
+            page_size=250000,
             hidden_columns = ['AB', 'TB']
         )], style = {'display': 'inline-block', 'margin-left':'50px'}),
     html.Div([
@@ -655,10 +655,10 @@ app.layout = html.Div(children=[
         row_deletable=True,
         selected_columns=[],
         selected_rows=[],
-        page_action="none",
+        page_action="custom",
         virtualization=True,
         page_current= 0,
-        page_size= 10,
+        page_size= 250000,
         hidden_columns = ['HR']
     )], style={'margin-left':'50px'})])
     
