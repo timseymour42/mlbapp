@@ -609,7 +609,7 @@ app.layout = html.Div(children=[
             row_deletable=True,
             selected_columns=[],
             selected_rows=[],
-            page_action="native",
+            page_action="none",
             page_current= 0,
             virtualization=True,
             page_size= 10,
