@@ -597,22 +597,22 @@ app.layout = html.Div(children=[
         ]),
         # hitter research table
         dash_table.DataTable(
-        data=ui_hit_df.to_dict('records'), ####### inserted line
-        columns = [{'id': c, 'name': c} for c in ui_hit_df.columns], ####### inserted line
-            id='htable',
-            filter_action='native',
-            row_selectable='single',
-            editable=False,
-            sort_action="native",
-            sort_mode="multi",
-            column_selectable="single",
-            row_deletable=True,
-            selected_columns=[],
-            selected_rows=[],
-            page_action="native",
-            page_current= 0,
-            page_size= 10,
-            hidden_columns = ['AB', 'TB']
+        # data=ui_hit_df.to_dict('records'), ####### inserted line
+        # columns = [{'id': c, 'name': c} for c in ui_hit_df.columns], ####### inserted line
+        #     id='htable',
+        #     filter_action='native',
+        #     row_selectable='single',
+        #     editable=False,
+        #     sort_action="native",
+        #     sort_mode="multi",
+        #     column_selectable="single",
+        #     row_deletable=True,
+        #     selected_columns=[],
+        #     selected_rows=[],
+        #     page_action="native",
+        #     page_current= 0,
+        #     page_size= 10,
+        #     hidden_columns = ['AB', 'TB']
         )], style = {'display': 'inline-block', 'margin-left':'50px'}),
     html.Div([
     #PITCHER SECTION
@@ -642,23 +642,23 @@ app.layout = html.Div(children=[
     ]),
     # pitcher research table
     dash_table.DataTable(
-       data=ui_pitch_df.to_dict('records'), ####### inserted line
-       columns = [{'id': c, 'name': c} for c in ui_pitch_df.columns], ####### inserted line
-        id='ptable',
-        filter_action='native',
-        row_selectable='single',
-        editable=False,
-        sort_action="native",
-        sort_mode="multi",
-        column_selectable="single",
-        row_deletable=True,
-        selected_columns=[],
-        selected_rows=[],
-        page_action="native",
-        page_current= 0,
-        page_size= 10,
-        hidden_columns = ['HR']
-    )], style={'margin-left':'50px'})
+    #    data=ui_pitch_df.to_dict('records'), ####### inserted line
+    #    columns = [{'id': c, 'name': c} for c in ui_pitch_df.columns], ####### inserted line
+    #     id='ptable',
+    #     filter_action='native',
+    #     row_selectable='single',
+    #     editable=False,
+    #     sort_action="native",
+    #     sort_mode="multi",
+    #     column_selectable="single",
+    #     row_deletable=True,
+    #     selected_columns=[],
+    #     selected_rows=[],
+    #     page_action="native",
+    #     page_current= 0,
+    #     page_size= 10,
+    #     hidden_columns = ['HR']
+    )], style={'margin-left':'50px'})])
     
 
 # #HITTER RESEARCH SECTION CALLBACKS
