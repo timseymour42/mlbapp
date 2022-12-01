@@ -587,17 +587,17 @@ app.layout = html.Div(children=[
         html.Label([
             "Hitter",
             dcc.Dropdown(
-                id='hitter-dropdown', clearable=True,
+                id='hitter-dropdown', clearable=False,
                 style={'width':'200px'},
                 multi = True,
-                value=[], options=[
+                value=['Aaron Judge'], options=[
                     {'label': c, 'value': c}
                     for c in ui_hit_df['Name'].unique()
                 ])
         ]),
         # hitter research table
         dash_table.DataTable(
-        data=ui_hit_df.to_dict('records'), ####### inserted line
+        data=ui_hit_df.loc[ui_hit_df.Name == 'Aaron Judge'].to_dict('records'), ####### inserted line
         columns = [{'id': c, 'name': c} for c in ui_hit_df.columns], ####### inserted line
             id='htable',
             filter_action='native',
@@ -609,10 +609,11 @@ app.layout = html.Div(children=[
             row_deletable=True,
             selected_columns=[],
             selected_rows=[],
-            page_action="custom",
-            page_current=0,
+            page_action="native",
+            page_current= 0,
             virtualization=True,
-            page_size=250000,
+            page_size= 10,
+            style_table={'height': '300px', 'overflowY': 'auto'},
             hidden_columns = ['AB', 'TB']
         )], style = {'display': 'inline-block', 'margin-left':'50px'}),
     html.Div([
@@ -633,17 +634,17 @@ app.layout = html.Div(children=[
     html.Label([
         "Pitcher",
         dcc.Dropdown(
-            id='pitcher-dropdown', clearable=True,
+            id='pitcher-dropdown', clearable=False,
             style={'width':'200px'},
             multi = True,
-            value=[], options=[
+            value=['Corbin Burnes'], options=[
                 {'label': c, 'value': c}
                 for c in ui_pitch_df['Name'].unique()
             ])
     ]),
     # pitcher research table
     dash_table.DataTable(
-       data=ui_pitch_df.to_dict('records'), ####### inserted line
+       data=ui_pitch_df.loc[ui_pitch_df.Name == 'Corbin Burnes'].to_dict('records'), ####### inserted line
        columns = [{'id': c, 'name': c} for c in ui_pitch_df.columns], ####### inserted line
         id='ptable',
         filter_action='native',
@@ -655,12 +656,13 @@ app.layout = html.Div(children=[
         row_deletable=True,
         selected_columns=[],
         selected_rows=[],
-        page_action="custom",
+        page_action="native",
         virtualization=True,
         page_current= 0,
-        page_size= 250000,
+        page_size= 20,
+        style_table={'height': '300px', 'overflowY': 'auto'},
         hidden_columns = ['HR']
-    )], style={'margin-left':'50px'})])
+    )], style={'margin-left':'50px', 'height': '5500px'})])
     
 
 #HITTER RESEARCH SECTION CALLBACKS
