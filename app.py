@@ -292,7 +292,6 @@ def clean_player_data(hit_df, pitch_df):
     Returns wrc, pitch as clean datasets for use in App'''
     
     hit_df = hit_df[hit_df['wRC+'] != None]
-    pitch_df.dropna(inplace=True)
     # applying the function to each column to ensure all data points are numerical
     for col in hit_df.columns:
         if col not in ['Name', 'Team', 'GB', 'Pos']:
