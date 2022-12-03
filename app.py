@@ -613,11 +613,11 @@ app.layout = html.Div(children=[
             selected_rows=[],
             page_action="native",
             page_current= 0,
-            fixed_rows={'headers': True},
-            virtualization=True,
+            # fixed_rows={'headers': True},
+            virtualization=False,
             page_size= 20,
-            style_table={'height': '400px', 'overflowY': 'auto'},
-            hidden_columns = ['AB', 'TB']
+            # style_table={'height': None},
+            hidden_columns = ['AB', 'TB'], fill_width=False
         )], style = {'display': 'inline-block', 'margin-left':'50px'}),
     html.Div([
     #PITCHER SECTION
@@ -660,13 +660,13 @@ app.layout = html.Div(children=[
         selected_columns=[],
         selected_rows=[],
         page_action="native",
-        virtualization=True,
+        virtualization=False,
         page_current= 0,
-        fixed_rows={'headers': True},
+        # fixed_rows={'headers': True},
         page_size= 20,
-        style_table={'height': '400px', 'overflowY': 'auto'},
+        # style_table={'height': None},
         hidden_columns = ['HR']
-    )], style={'margin-left':'50px'})])
+    )], style={'margin-left':'50px', 'margin-bottom': '200px'})])
     
 
 #HITTER RESEARCH SECTION CALLBACKS
