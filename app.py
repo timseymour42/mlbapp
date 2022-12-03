@@ -615,7 +615,7 @@ app.layout = html.Div(children=[
             page_current= 0,
             fixed_rows={'headers': True},
             virtualization=True,
-            page_size= 10,
+            page_size= 20,
             style_table={'height': '400px', 'overflowY': 'auto'},
             hidden_columns = ['AB', 'TB']
         )], style = {'display': 'inline-block', 'margin-left':'50px'}),
@@ -706,10 +706,10 @@ def update_data(teams, pitchers):
     htiters: selected hitters
   '''
   if teams and pitchers:
-    a= ui_pitch_df.loc[(ui_pitch_df.Team.isin(teams)) & (ui_pitch_df.Name.isin(pitchers))]
+    a = ui_pitch_df.loc[(ui_pitch_df.Team.isin(teams)) & (ui_pitch_df.Name.isin(pitchers))]
     return a.to_dict('records')
   elif pitchers:
-    a= ui_pitch_df.loc[(ui_pitch_df.Name.isin(pitchers))]
+    a = ui_pitch_df.loc[(ui_pitch_df.Name.isin(pitchers))]
     return a.to_dict('records')
   return pd.DataFrame().to_dict('records')
 
