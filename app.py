@@ -356,6 +356,8 @@ def refresh_data():
     return team_history, ui_hit_df, ui_pitch_df, X, y, scales, hit_sel, pit_sel, curr_year, first_year, games, innings
 
 team_history, ui_hit_df, ui_pitch_df, X, y, scales, hit_sel, pit_sel, curr_year, first_year, games, innings = refresh_data()
+ui_hit_df = ui_hit_df.drop(columns=['index', 'hitter_id'])
+ui_pitch_df = ui_pitch_df.drop(columns=['index', 'pitcher_id'])
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.LUX])
 #server for render
@@ -611,9 +613,10 @@ app.layout = html.Div(children=[
             selected_rows=[],
             page_action="native",
             page_current= 0,
+            fixed_rows={'headers': True},
             virtualization=True,
             page_size= 10,
-            style_table={'height': '300px', 'overflowY': 'auto'},
+            style_table={'height': '400px', 'overflowY': 'auto'},
             hidden_columns = ['AB', 'TB']
         )], style = {'display': 'inline-block', 'margin-left':'50px'}),
     html.Div([
@@ -659,10 +662,11 @@ app.layout = html.Div(children=[
         page_action="native",
         virtualization=True,
         page_current= 0,
+        fixed_rows={'headers': True},
         page_size= 20,
-        style_table={'height': '300px', 'overflowY': 'auto'},
+        style_table={'height': '400px', 'overflowY': 'auto'},
         hidden_columns = ['HR']
-    )], style={'margin-left':'50px', 'height': '5500px'})])
+    )], style={'margin-left':'50px'})])
     
 
 #HITTER RESEARCH SECTION CALLBACKS
@@ -682,13 +686,10 @@ def update_data(teams, hitters):
   if teams and hitters:
     a = ui_hit_df.loc[(ui_hit_df.Team.isin(teams)) & (ui_hit_df.Name.isin(hitters))]
     return a.to_dict('records')
-  elif teams:
-    a = ui_hit_df.loc[(ui_hit_df.Team.isin(teams))]
-    return a.to_dict('records')
   elif hitters:
     a = ui_hit_df.loc[(ui_hit_df.Name.isin(hitters))]
     return a.to_dict('records')
-  return ui_hit_df.to_dict('records')
+  return pd.DataFrame().to_dict('records')
 
 #PITCHER RESEARCH SECTION CALLBACKS
 @app.callback(Output('ptable', 'columns'), [Input('team-pitch', 'value'), 
@@ -707,13 +708,10 @@ def update_data(teams, pitchers):
   if teams and pitchers:
     a= ui_pitch_df.loc[(ui_pitch_df.Team.isin(teams)) & (ui_pitch_df.Name.isin(pitchers))]
     return a.to_dict('records')
-  elif teams:
-    a= ui_pitch_df.loc[(ui_pitch_df.Team.isin(teams))]
-    return a.to_dict('records')
   elif pitchers:
     a= ui_pitch_df.loc[(ui_pitch_df.Name.isin(pitchers))]
     return a.to_dict('records')
-  return ui_pitch_df.to_dict('records')
+  return pd.DataFrame().to_dict('records')
 
 #CALLBACK FOR PLAYER SUBMISSION
 @app.callback([Output('hit_sel_tbl', 'children'), Output('game', 'children'),
