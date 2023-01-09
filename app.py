@@ -123,8 +123,12 @@ class hitter:
             if seas in hitter.index:
                 played.append(seas)
         hitter = hitter.loc[played]
-        #wRC+ is normalized season by season, so average is taken across inputted season range; drawback is smaller sample sizes may have greater effect than hoped
-        #Users will be able to see season by season stats for the player, so they can use their own intuition to evaluate validity of using a given season for a player
+        #wRC+ is normalized season by season, so average is taken 
+        # across inputted season range; drawback is smaller sample
+        #  sizes may have greater effect than hoped
+        #Users will be able to see season by season stats for the player, 
+        # so they can use their own intuition to evaluate validity of 
+        # using a given season for a player
         self.wrcp = hitter['wRC+'].mean()
         #finds slugging percentage
         self.slg = hitter['TB'].sum() / hitter['AB'].sum()
